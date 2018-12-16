@@ -188,6 +188,12 @@ pub const SND_PCM_TSTAMP_ENABLE: c_uint = 1;
 pub const SND_PCM_TSTAMP_MMAP:   c_uint = 1;
 pub const SND_PCM_TSTAMP_LAST:   c_uint = 1;
 
+pub type snd_pcm_tstamp_type_t = c_uint;
+pub const SND_PCM_TSTAMP_TYPE_GETTIMEOFDAY:  c_uint = 0;
+pub const SND_PCM_TSTAMP_TYPE_MONOTONIC:     c_uint = 1;
+pub const SND_PCM_TSTAMP_TYPE_MONOTONIC_RAW: c_uint = 2;
+pub const SND_PCM_TSTAMP_TYPE_LAST:          c_uint = 2;
+
 pub type snd_pcm_uframes_t = c_ulong;
 pub type snd_pcm_sframes_t = c_long;
 pub enum snd_pcm_t { }
@@ -1174,6 +1180,8 @@ extern "C" {
     pub fn snd_pcm_sw_params_get_boundary(params: *const snd_pcm_sw_params_t, val: *mut snd_pcm_uframes_t) -> c_int;
     pub fn snd_pcm_sw_params_set_tstamp_mode(pcm: *mut snd_pcm_t, params: *mut snd_pcm_sw_params_t, val: snd_pcm_tstamp_t) -> c_int;
     pub fn snd_pcm_sw_params_get_tstamp_mode(params: *const snd_pcm_sw_params_t, val: *mut snd_pcm_tstamp_t) -> c_int;
+    pub fn snd_pcm_sw_params_set_tstamp_type(pcm: *mut snd_pcm_t, params: *mut snd_pcm_sw_params_t, val: snd_pcm_tstamp_type_t) -> c_int;
+    pub fn snd_pcm_sw_params_get_tstamp_type(params: *const snd_pcm_sw_params_t, val: *mut snd_pcm_tstamp_type_t) -> c_int;
     pub fn snd_pcm_sw_params_set_avail_min(pcm: *mut snd_pcm_t, params: *mut snd_pcm_sw_params_t, val: snd_pcm_uframes_t) -> c_int;
     pub fn snd_pcm_sw_params_get_avail_min(params: *const snd_pcm_sw_params_t, val: *mut snd_pcm_uframes_t) -> c_int;
     pub fn snd_pcm_sw_params_set_period_event(pcm: *mut snd_pcm_t, params: *mut snd_pcm_sw_params_t, val: c_int) -> c_int;
